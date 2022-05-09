@@ -1,0 +1,23 @@
+<form>
+    <mat-form-field class="full-width"
+        appearance="fill">
+        <mat-label>Email Address</mat-label>
+        <input #Email
+            id = "vE"
+            [(ngModel)]="validEmail"
+            name="vldEml"matInput
+            required
+            [formControl]="emailFormControl"
+            [errorStateMatcher]="matcher"
+            placeholder="Ex. pat@example.com"
+            (keyup.enter)="sendMessage()"
+            (blur)="sendMessage()">
+          <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+</form>

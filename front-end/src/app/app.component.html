@@ -1,0 +1,31 @@
+<mat-sidenav-container fullscreen>
+
+  <mat-sidenav #sidenav>
+    <mat-nav-list (click)="sidenav.close()">
+      <a mat-list-item routerLink="/home">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </a>
+      <a mat-list-item routerLink="/application">
+        <mat-icon>view_list</mat-icon>
+        <span>Application Form</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-toolbar color="white" style="height:100px">
+    <button class="menu-button" mat-icon-button (click)="sidenav.open('mouse')">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <p class="left">
+      <img src="assets/img/justice-doj_logo-new.jpg" width="200">
+    </p>
+  </mat-toolbar>
+  
+  <div class="main-content">
+    <router-outlet></router-outlet>
+    <app-messages></app-messages>
+  </div>
+  
+  
+</mat-sidenav-container>

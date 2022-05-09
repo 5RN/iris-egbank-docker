@@ -1,0 +1,253 @@
+<form class="form" name = "FOIApplication"
+(ngSubmit)="onSubmit()" #applicationForm="ngForm">
+<h2 class = "black-text">
+  Request for Access to Records under the FOI Act 2014
+</h2>
+<p class = "black-text">
+  You may use this form to apply, under the FOI Act, 
+  for records held by the Department of Justice and Equality
+</p>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="full-width"
+          id = "title"
+          appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput
+          name="Title"
+          [(ngModel)]="applicationFormModel.Title"
+          [formControl]="titleControl"
+          placeholder="Mr. / Mrs. /...">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="full-width"
+          id = "LastName"
+          appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput
+          name="LastName"
+          [(ngModel)]="applicationFormModel.LastName"
+          [formControl]="lastNameControl">
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="full-width"
+          id = "FirstName"
+          appearance="fill">
+          <mat-label>First name</mat-label>
+          <input matInput
+          name="FirstName"
+          [(ngModel)]="applicationFormModel.FirstName"
+          [formControl]="firstNameControl">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="full-width"
+          id = "MiddleName"
+          appearance="fill">
+          <mat-label>Middle Name</mat-label>
+          <input matInput
+          name="MiddleName"
+          [(ngModel)]="applicationFormModel.MiddleName">
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="full-width"
+          id = "BuildingName"
+          appearance="fill">
+          <mat-label>Building Name</mat-label>
+          <input matInput
+          name="BuildingName"
+          [(ngModel)]="applicationFormModel.BuildingName">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="full-width"
+          id = "Number"
+          appearance="fill">
+          <mat-label>No.</mat-label>
+          <input matInput
+          name="Number"
+          [(ngModel)]="applicationFormModel.Number"
+          placeholder="House number">
+        </mat-form-field>
+      </td>  
+    </tr>
+  </table>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="full-width"
+          id = "Street"
+          appearance="fill">
+          <mat-label>Street</mat-label>
+          <input matInput
+          name="Street"
+          [(ngModel)]="applicationFormModel.Street">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="full-width"
+          id = "Town"
+          appearance="fill">
+          <mat-label>Town</mat-label>
+          <input matInput
+          name="Town"
+          [(ngModel)]="applicationFormModel.Town"
+          placeholder="Or Dublin District">
+      </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="full-width"
+          id = "County"
+          appearance="fill">
+          <mat-label>County</mat-label>
+          <input matInput
+          name="County"
+          [(ngModel)]="applicationFormModel.County"
+          placeholder="Eg. Antrim">
+        </mat-form-field>
+        </td>
+        <td>
+        <mat-form-field class="full-width"
+          id="EIRCode"
+          appearance="fill">
+          <mat-label>EIR CODE</mat-label>
+          <input matInput
+            name="EIRCode"
+            [(ngModel)]="applicationFormModel.EIRCode"
+            [formControl]="eirControl"
+            placeholder="Ex. A65 F4E2"
+            type="text"
+            pattern="[A-Z0-9]{7}"
+            aria-label="Number"
+            [matAutocomplete]="auto"
+            #EIRCode maxlength="7">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option 
+              *ngFor="let option of filteredOptions | async"
+              [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-hint align="end">{{EIRCode.value.length}} / 7</mat-hint>
+        </mat-form-field>
+        </td>
+    </tr>
+  </table>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="full-width"
+          id = "BusinessPhone"
+          appearance="fill">
+          <mat-label>Business</mat-label>
+          <input matInput
+          name="BusinessPhone"
+          [(ngModel)]="applicationFormModel.BusinessPhone">
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="full-width"
+          id = "Mobile"
+          appearance="fill">
+          <mat-label>Mobile</mat-label>
+          <input matInput
+          name="Mobile"
+          [(ngModel)]="applicationFormModel.Mobile">
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="full-width"
+          id = "HomePhone"
+          appearance="fill">
+          <mat-label>Home</mat-label>
+          <input matInput
+          name="HomePhone"
+          [(ngModel)]="applicationFormModel.HomePhone">
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+      </td>
+      <td>
+        <email-validator (messageEvent)="receiveEmailMessage($event)"></email-validator>
+      </td>
+    </tr>
+  </table>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <mat-radio-group 
+        name="TypeOfRecord"
+        [(ngModel)]="applicationFormModel.TypeOfRecord"
+        aria-label="In accordance with Section 12 of the FOI Act, I request access to records which
+        are:"
+        id = "TypeOfRecord">
+        <mat-radio-button name = "0" value=0 >Personal</mat-radio-button>
+        <mat-radio-button name = "1" value=1>Non-Personal</mat-radio-button>
+      </mat-radio-group>      
+    </tr>
+  </table>
+  <p></p>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <mat-radio-group 
+        [(ngModel)]="applicationFormModel.FormOfAccessChoice"
+        name="FormOfAccess"
+        aria-label="My preferred form of access is:"
+        id = "FormOfAccess">
+        <mat-radio-button name = "0" value=0 (change)="onButtonChange(0)">Receive copies of record by post</mat-radio-button>
+        <mat-radio-button name = "1" value=1 (change)="onButtonChange(1)">Other</mat-radio-button>
+        <mat-error *ngIf="this.accessChoiceValue">
+          Please <strong>specify</strong>
+      </mat-error>
+      </mat-radio-group> 
+    </tr>
+    <tr>
+        <mat-form-field class="full-width"
+          id = "Other">
+        <mat-label></mat-label>
+        <input matInput
+          name="Other"
+          [(ngModel)]="applicationFormModel.FormOfAccessSpecify"
+          [hidden]=!this.accessChoiceValue
+          placeholder="Please specify how you will like access to your records">
+    </mat-form-field>
+    </tr>
+  </table>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <mat-form-field class="full-width"
+        id="RequestText"
+        appearance="fill">
+        <mat-label>I request the following records:</mat-label>
+        <textarea #RequestText matInput
+        [formControl]="requestTextControl"
+        [(ngModel)]="applicationFormModel.RequestText"
+        name="RequestText"
+        placeholder="Please enter your request here"></textarea>
+      </mat-form-field>
+    </tr>
+  </table>
+  <section>
+    <div class="button-row">
+      <button mat-stroked-button>Submit</button>
+    </div>
+  </section>
+</form>

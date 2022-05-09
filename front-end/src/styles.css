@@ -1,0 +1,32 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 100;
+}
+.basic-container {
+  padding: 100px;
+}
+.version-info {
+  font-size: 8pt;
+  float: right;
+  margin: 100px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  color : grey;
+  font-weight: lighter;
+}
+  
+.mat-radio-button {
+  margin: 5px;
+  margin-left: 1px;
+}
+
+.radio-label {
+    font-weight: lighter;
+    color: grey;
+}
