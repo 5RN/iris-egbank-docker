@@ -1,0 +1,11 @@
+.center {
+    text-align: center;
+}
+.jumbotron {
+    margin: 20px;
+    background-color: #fff;
+    padding: 5px;
+}
+.about {
+    color:grey;
+}

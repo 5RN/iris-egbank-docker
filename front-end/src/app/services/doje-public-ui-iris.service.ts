@@ -15,7 +15,7 @@ export class DOJEIRISService {
     private messageService: MessageService) { }
 
   private log(message: string) {
-    this.messageService.add(`DoJE Service: ${message}`);
+    this.messageService.add(`EGBank Service: ${message}`);
   }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -31,7 +31,7 @@ export class DOJEIRISService {
   // It appears unnecessary to create http options / headers
   // for ths application, but included for completeness of solution
   httpOptions = {
-    headers: new HttpHeaders({ 
+    headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'responseType': 'json'})
   };
@@ -39,10 +39,13 @@ export class DOJEIRISService {
   saveRequest(foiRequest: any):Observable<any> {
 
     const headers = new HttpHeaders()
-    let url = 'http://localhost:9092/doje/api2/FOIRequest'
+    //let url = 'http://localhost:52773/egbank/api/FOIRequest'
+    let url = 'http://ec2-35-178-138-69.eu-west-2.compute.amazonaws.com:52774/egbank/api/FOIRequest'
     return this.http.post<any>(url, foiRequest,this.httpOptions)
     .pipe(
       tap((newrequest: any) => this.log(`Thank you. Your application ID is SN1492-${newrequest.ID}`)),
       catchError(this.handleError<any>('saverequest')))
+
+
   }
 }

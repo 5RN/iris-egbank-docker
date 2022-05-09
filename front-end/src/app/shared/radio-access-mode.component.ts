@@ -9,6 +9,7 @@ import {Component, Output, EventEmitter} from '@angular/core';
     <label class="radio-label" id="radio-group-label">
         My preferred form of access is:
     </label>
+    <!--
     <mat-radio-group
         aria-labelledby="radio-group-label"
         class="radio-group"
@@ -20,6 +21,7 @@ import {Component, Output, EventEmitter} from '@angular/core';
         {{option}}
     </mat-radio-button>
     </mat-radio-group>
+-->
 `
 //<div>Your access choice is: {{accessModeOption}}</div>
 //`

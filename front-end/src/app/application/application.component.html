@@ -1,191 +1,82 @@
 <form class="form" name = "FOIApplication"
 (ngSubmit)="onSubmit()" #applicationForm="ngForm">
 <h2 class = "black-text">
-  Request for Access to Records under the FOI Act 2014
+  APPLY NOW
 </h2>
 <p class = "black-text">
-  You may use this form to apply, under the FOI Act, 
-  for records held by the Department of Justice and Equality
+  Please enter the following details to be considered for a personal loan from any of our partner banks. Mandatory fields marked by *.
 </p>
-  <table class="full-width" cellspacing="0">
-    <tr>
-      <td>
-        <mat-form-field class="full-width"
-          id = "title"
-          appearance="fill">
-          <mat-label>Title</mat-label>
-          <input matInput
-          name="Title"
-          [(ngModel)]="applicationFormModel.Title"
-          [formControl]="titleControl"
-          placeholder="Mr. / Mrs. /...">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="full-width"
-          id = "LastName"
-          appearance="fill">
-          <mat-label>Last Name</mat-label>
-          <input matInput
-          name="LastName"
-          [(ngModel)]="applicationFormModel.LastName"
-          [formControl]="lastNameControl">
-        </mat-form-field>
-      </td>
-    </tr>
-  </table>
+&nbsp;
+<h3 class = "black-text">
+  Loan Details
+</h3>
+<table class="full-width" cellspacing="0">
+  <tr>
+    <td>
+      <mat-form-field class="full-width"
+        id = "TotalLoanAmount"
+        appearance="fill">
+        <mat-label>Total Loan Amount in EGP *</mat-label>
+        <input type="number" matInput
+        name="TotalLoanAmount"
+        [(ngModel)]="applicationFormModel.TotalLoanAmount"
+        [formControl]="TotalLoanAmountControl">
+        <mat-hint>Maximum Personal Loan Amount is EGP 3,000,000</mat-hint>
+      </mat-form-field>
+    </td>
+    <!--
+    <td>
+      <loan-amount-validator (messageEvent)="receiveLoanAmount($event)"></loan-amount-validator>
+    </td>
+    -->
+    <td>
+      <mat-form-field class="full-width"
+        id = "LoanTenor"
+        appearance="fill">
+        <mat-label>Requested Loan Tenor in Months *</mat-label>
+        <input type="number" matInput
+        name="Loan Tenor"
+        [(ngModel)]="applicationFormModel.LoanTenor"
+        [formControl]="LoanTenorControl">
+        <mat-hint>Must be between 6 and 120 months</mat-hint>
+      </mat-form-field>
+    </td>
+    &nbsp;&nbsp;&nbsp;
+  </tr>
+</table>
+&nbsp;
+<h3 class = "black-text">
+  Personal Details
+</h3>
   <table class="full-width" cellspacing="0">
     <tr>
       <td>
         <mat-form-field class="full-width"
           id = "FirstName"
           appearance="fill">
-          <mat-label>First name</mat-label>
+          <mat-label>First Name *</mat-label>
           <input matInput
           name="FirstName"
           [(ngModel)]="applicationFormModel.FirstName"
-          [formControl]="firstNameControl">
+          [formControl]="FirstNameControl">
         </mat-form-field>
       </td>
       <td>
         <mat-form-field class="full-width"
-          id = "MiddleName"
+          id = "LastName"
           appearance="fill">
-          <mat-label>Middle Name</mat-label>
+          <mat-label>Last Name *</mat-label>
           <input matInput
-          name="MiddleName"
-          [(ngModel)]="applicationFormModel.MiddleName">
+          name="LastName"
+          [(ngModel)]="applicationFormModel.LastName"
+          [formControl]="LastNameControl">
         </mat-form-field>
       </td>
+      &nbsp;&nbsp;&nbsp;
     </tr>
   </table>
   <table class="full-width" cellspacing="0">
     <tr>
-      <td>
-        <mat-form-field class="full-width"
-          id = "BuildingName"
-          appearance="fill">
-          <mat-label>Building Name</mat-label>
-          <input matInput
-          name="BuildingName"
-          [(ngModel)]="applicationFormModel.BuildingName">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="full-width"
-          id = "Number"
-          appearance="fill">
-          <mat-label>No.</mat-label>
-          <input matInput
-          name="Number"
-          [(ngModel)]="applicationFormModel.Number"
-          placeholder="House number">
-        </mat-form-field>
-      </td>  
-    </tr>
-  </table>
-  <table class="full-width" cellspacing="0">
-    <tr>
-      <td>
-        <mat-form-field class="full-width"
-          id = "Street"
-          appearance="fill">
-          <mat-label>Street</mat-label>
-          <input matInput
-          name="Street"
-          [(ngModel)]="applicationFormModel.Street">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="full-width"
-          id = "Town"
-          appearance="fill">
-          <mat-label>Town</mat-label>
-          <input matInput
-          name="Town"
-          [(ngModel)]="applicationFormModel.Town"
-          placeholder="Or Dublin District">
-      </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <mat-form-field class="full-width"
-          id = "County"
-          appearance="fill">
-          <mat-label>County</mat-label>
-          <input matInput
-          name="County"
-          [(ngModel)]="applicationFormModel.County"
-          placeholder="Eg. Antrim">
-        </mat-form-field>
-        </td>
-        <td>
-        <mat-form-field class="full-width"
-          id="EIRCode"
-          appearance="fill">
-          <mat-label>EIR CODE</mat-label>
-          <input matInput
-            name="EIRCode"
-            [(ngModel)]="applicationFormModel.EIRCode"
-            [formControl]="eirControl"
-            placeholder="Ex. A65 F4E2"
-            type="text"
-            pattern="[A-Z0-9]{7}"
-            aria-label="Number"
-            [matAutocomplete]="auto"
-            #EIRCode maxlength="7">
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option 
-              *ngFor="let option of filteredOptions | async"
-              [value]="option">
-              {{option}}
-            </mat-option>
-          </mat-autocomplete>
-          <mat-hint align="end">{{EIRCode.value.length}} / 7</mat-hint>
-        </mat-form-field>
-        </td>
-    </tr>
-  </table>
-  <table class="full-width" cellspacing="0">
-    <tr>
-      <td>
-        <mat-form-field class="full-width"
-          id = "BusinessPhone"
-          appearance="fill">
-          <mat-label>Business</mat-label>
-          <input matInput
-          name="BusinessPhone"
-          [(ngModel)]="applicationFormModel.BusinessPhone">
-          <mat-icon matSuffix>phone</mat-icon>
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="full-width"
-          id = "Mobile"
-          appearance="fill">
-          <mat-label>Mobile</mat-label>
-          <input matInput
-          name="Mobile"
-          [(ngModel)]="applicationFormModel.Mobile">
-          <mat-icon matSuffix>phone</mat-icon>
-        </mat-form-field>
-      </td>
-    </tr>
-  </table>
-  <table class="full-width" cellspacing="0">
-    <tr>
-      <td>
-        <mat-form-field class="full-width"
-          id = "HomePhone"
-          appearance="fill">
-          <mat-label>Home</mat-label>
-          <input matInput
-          name="HomePhone"
-          [(ngModel)]="applicationFormModel.HomePhone">
-          <mat-icon matSuffix>phone</mat-icon>
-        </mat-form-field>
-      </td>
       <td>
         <email-validator (messageEvent)="receiveEmailMessage($event)"></email-validator>
       </td>
@@ -193,55 +84,225 @@
   </table>
   <table class="full-width" cellspacing="0">
     <tr>
-      <mat-radio-group 
-        name="TypeOfRecord"
-        [(ngModel)]="applicationFormModel.TypeOfRecord"
-        aria-label="In accordance with Section 12 of the FOI Act, I request access to records which
-        are:"
-        id = "TypeOfRecord">
-        <mat-radio-button name = "0" value=0 >Personal</mat-radio-button>
-        <mat-radio-button name = "1" value=1>Non-Personal</mat-radio-button>
-      </mat-radio-group>      
+      <td>
+        <mat-form-field class="full-width"
+          id = "Mobile"
+          appearance="fill">
+          <mat-label>Mobile Number *</mat-label>
+          <input matInput
+          name="Mobile"
+          [(ngModel)]="applicationFormModel.Mobile"
+          [formControl]="MobileControl">
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+      </td>
     </tr>
   </table>
-  <p></p>
   <table class="full-width" cellspacing="0">
     <tr>
-      <mat-radio-group 
-        [(ngModel)]="applicationFormModel.FormOfAccessChoice"
-        name="FormOfAccess"
-        aria-label="My preferred form of access is:"
-        id = "FormOfAccess">
-        <mat-radio-button name = "0" value=0 (change)="onButtonChange(0)">Receive copies of record by post</mat-radio-button>
-        <mat-radio-button name = "1" value=1 (change)="onButtonChange(1)">Other</mat-radio-button>
-        <mat-error *ngIf="this.accessChoiceValue">
-          Please <strong>specify</strong>
-      </mat-error>
-      </mat-radio-group> 
-    </tr>
-    <tr>
+      <td>
         <mat-form-field class="full-width"
-          id = "Other">
-        <mat-label></mat-label>
-        <input matInput
-          name="Other"
-          [(ngModel)]="applicationFormModel.FormOfAccessSpecify"
-          [hidden]=!this.accessChoiceValue
-          placeholder="Please specify how you will like access to your records">
-    </mat-form-field>
+          id = "nationalid"
+          appearance="fill">
+          <mat-label>National ID *</mat-label>
+          <input matInput
+          name="NationalID"
+          [(ngModel)]="applicationFormModel.NationalID"
+          [formControl]="NationalIDControl">
+          <mat-hint>National ID or Passport Number</mat-hint>
+          <mat-icon matSuffix></mat-icon>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="full-width"
+          id = "nationality"
+          appearance="fill">
+          <mat-label>Nationality</mat-label>
+          <input matInput
+          name="Nationality"
+          [(ngModel)]="applicationFormModel.Nationality">
+          <mat-hint></mat-hint>
+          <mat-icon matSuffix></mat-icon>
+        </mat-form-field>
+      </td>
+      <td>
+        &nbsp;&nbsp;&nbsp;
+      </td>
     </tr>
   </table>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="full-width"
+          id = "DOB"
+          appearance="fill">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput [matDatepicker]="picker"
+          name="DOB"
+          [(ngModel)]="applicationFormModel.dob">
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-icon matSuffix></mat-icon>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="full-width"
+          id = "PreferredBranch"
+          appearance="fill">
+          <mat-label>Preferred Branch *</mat-label>
+          <mat-select [(ngModel)]="applicationFormModel.PreferredBranch"
+            [formControl]="PreferredBranchControl">
+            <mat-option value="100">- No Preference -</mat-option>
+            <mat-option value="0">10th of Ramadan</mat-option>
+            <mat-option value="1">Abbas El Akkad</mat-option>
+            <mat-option value="2">Ahmed Fakhry</mat-option>
+            <mat-option value="3">Airport</mat-option>
+            <mat-option value="4">Al Azhar</mat-option>
+            <mat-option value="5">Al Massa Hotel</mat-option>
+            <mat-option value="6">Alexandria</mat-option>
+            <mat-option value="7">Ammar Ibn Yasser</mat-option>
+            <mat-option value="8">Assuit</mat-option>
+            <mat-option value="9">Bavaria</mat-option>
+            <mat-option value="10">Beirut (MINT)</mat-option>
+            <mat-option value="11">Beirut ST</mat-option>
+            <mat-option value="12">Cairo University</mat-option>
+            <mat-option value="13">City Stars</mat-option>
+            <mat-option value="14">City Stars (MINT)</mat-option>
+            <mat-option value="15">Corniche El Maadi</mat-option>
+            <mat-option value="16">Damietta</mat-option>
+            <mat-option value="17">Downtown</mat-option>
+            <mat-option value="18">El Korba</mat-option>
+            <mat-option value="19">El Korba (MINT)</mat-option>
+            <mat-option value="20">Gamet El Dewal ST</mat-option>
+            <mat-option value="21">Giza (Head Office)</mat-option>
+            <mat-option value="22">Gleem</mat-option>
+            <mat-option value="23">Gulf City</mat-option>
+            <mat-option value="24">Haram</mat-option>
+            <mat-option value="25">Haram 2</mat-option>
+            <mat-option value="26">Heliopolis</mat-option>
+            <mat-option value="27">International Garden</mat-option>
+            <mat-option value="28">Ismailia Square</mat-option>
+            <mat-option value="29">Ismailia City</mat-option>
+            <mat-option value="30">Kafr Abdo</mat-option>
+            <mat-option value="31">Khalifa Mamoun</mat-option>
+            <mat-option value="32">Loran</mat-option>
+            <mat-option value="33">Maadi</mat-option>
+            <mat-option value="34">Maadi 2</mat-option>
+            <mat-option value="35">Mandra</mat-option>
+            <mat-option value="36">Mansoura</mat-option>
+            <mat-option value="37">Meeting Point</mat-option>
+            <mat-option value="38">Merghani</mat-option>
+            <mat-option value="39">Merghany</mat-option>
+            <mat-option value="40">Mesaha</mat-option>
+            <mat-option value="41">Mohandesien</mat-option>
+            <mat-option value="42">Musdaq</mat-option>
+            <mat-option value="43">New Cairo</mat-option>
+            <mat-option value="44">October</mat-option>
+            <mat-option value="45">Operation Building 217</mat-option>
+            <mat-option value="46">Palm Strip</mat-option>
+            <mat-option value="47">Port Said</mat-option>
+            <mat-option value="48">Sheik Zayed</mat-option>
+            <mat-option value="49">Sheraton</mat-option>
+            <mat-option value="50">Shooting Club</mat-option>
+            <mat-option value="51">Smart Village</mat-option>
+            <mat-option value="52">Smouha</mat-option>
+            <mat-option value="53">Stanly</mat-option>
+            <mat-option value="54">Tayran - Borg Shahid</mat-option>
+            <mat-option value="55">The Corner</mat-option>
+            <mat-option value="56">Zahraa El Maadi</mat-option>
+            <mat-option value="57">Zakar Hussein</mat-option>
+            <mat-option value="58">Zamalek</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="full-width"
+          id = "MonthlyIncome"
+          appearance="fill">
+          <mat-label>Average Monthly Income *</mat-label>
+          <input type="number" matInput
+          name="MonthlyIncome"
+          [(ngModel)]="applicationFormModel.MonthlyIncome"
+          [formControl]="MonthlyIncomeControl">
+          <mat-icon matSuffix></mat-icon>
+        </mat-form-field>
+        </td>
+        <td>
+        <mat-form-field class="full-width"
+          id = "MonthlyIncomeCurrency"
+          appearance="fill">
+          <mat-label>Currency *</mat-label>
+          <mat-select [(ngModel)]="applicationFormModel.MonthlyIncomeCurrency"
+            [formControl]="CurrencyControl">
+            <mat-option value="0">EGP</mat-option>
+            <mat-option value="1">USD</mat-option>
+            <mat-option value="2">GBP</mat-option>
+            <mat-option value="3">EUR</mat-option>
+            <mat-option value="4">JPY</mat-option>
+            <mat-option value="5">AED</mat-option>
+            <mat-option value="6">HKD</mat-option>
+            <mat-option value="7">RUB</mat-option>
+            <mat-option value="8">CNY</mat-option>
+            <mat-option value="9">QAR</mat-option>
+            <mat-option value="10">KWD</mat-option>
+          </mat-select>
+          <mat-icon matSuffix></mat-icon>
+        </mat-form-field>
+      </td>
+      <td>
+        &nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+  </table>
+  <p>Please select your current employment status:</p>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <mat-radio-group
+        name="TypeOfRecord"
+        [(ngModel)]="applicationFormModel.EmploymentType"
+        aria-label="Please select your current employment status:"
+        id = "EmploymentType">
+        <mat-radio-button name = "0" value=0>Full-Time</mat-radio-button>
+        <mat-radio-button name = "1" value=1>Part-Time</mat-radio-button>
+        <mat-radio-button name = "2" value=2>Self-Employed</mat-radio-button>
+        <mat-radio-button name = "3" value=3>Freelance</mat-radio-button>
+        <mat-radio-button name = "4" value=4>Unemployed</mat-radio-button>
+      </mat-radio-group>
+    </tr>
+  </table>
+  <p>Are you an existing customer of EGBank?</p>
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <mat-radio-group
+        [(ngModel)]="applicationFormModel.ExistingCustomer"
+        name="ExistingCustomer"
+        aria-label="Are you an existing customer of EGBank?"
+        id = "FormOfAccess">
+        <mat-radio-button name = "0" value=0 (change)="onButtonChange(0)">Yes</mat-radio-button>
+        <mat-radio-button name = "1" value=1 (change)="onButtonChange(1)">No</mat-radio-button>
+      </mat-radio-group>
+    </tr>
+  </table>
+  &nbsp;
   <table class="full-width" cellspacing="0">
     <tr>
       <mat-form-field class="full-width"
-        id="RequestText"
+        id="Comments"
         appearance="fill">
-        <mat-label>I request the following records:</mat-label>
+        <mat-label>Comments:</mat-label>
         <textarea #RequestText matInput
-        [formControl]="requestTextControl"
-        [(ngModel)]="applicationFormModel.RequestText"
-        name="RequestText"
-        placeholder="Please enter your request here"></textarea>
+        [(ngModel)]="applicationFormModel.Comments"
+        name="Comments"
+        placeholder="Please write any relevant comments here:"></textarea>
       </mat-form-field>
     </tr>
   </table>

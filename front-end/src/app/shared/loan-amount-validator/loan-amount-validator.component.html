@@ -1,0 +1,22 @@
+<form>
+  <mat-form-field class="full-width"
+      appearance="fill">
+      <mat-label></mat-label>
+      <input #TotalLoanAmount
+          id = "vTLA"
+          name="vldAmt"matInput
+          required
+          [formControl]="amountFormControl"
+          [errorStateMatcher]="matcher"
+          placeholder="Ex. 20000">
+      <mat-error *ngIf="amountFormControl.hasError('min')">
+        Please enter a valid amount
+      </mat-error>
+      <mat-error *ngIf="amountFormControl.hasError('max')">
+        Maximum amount is EGP 3,000,000
+      </mat-error>
+      <mat-error *ngIf="amountFormControl.hasError('required')">
+        Please enter a loan amount
+      </mat-error>
+  </mat-form-field>
+</form>

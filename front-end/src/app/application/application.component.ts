@@ -11,6 +11,7 @@ import {EmailValidator} from '../shared/email-validator/email-validator.componen
 import { CustomvalidationService } from '../services/customvalidation.service';
 import { DOJEIRISService } from '../services/doje-public-ui-iris.service';
 import { MessageService } from '../services/message.service';
+//import { LoanAmountValidator } from '../shared/loan-amount-validator/loan-amount-validator.component';
 
 @Component({
   providers:[
@@ -20,6 +21,7 @@ import { MessageService } from '../services/message.service';
   templateUrl: './application.component.html',
   styleUrls: ['./application.component.css']
 })
+
 export class ApplicationComponent implements OnInit {
   otherAccessChoice= new Boolean(false);
   options: string[] = EIRCODES;
@@ -27,23 +29,37 @@ export class ApplicationComponent implements OnInit {
   FOIRequestForm: FormGroup;
   accessChoiceValue: number;
 
-  titleControl = new FormControl('',[
+  TotalLoanAmountControl = new FormControl('',[
+    Validators.required, Validators.max(3000000), Validators.min(0)
+  ])
+  LoanTenorControl = new FormControl('',[
+    Validators.required, Validators.max(120), Validators.min(6)
+  ])
+  FirstNameControl = new FormControl('',[
     Validators.required
   ]);
-  lastNameControl = new FormControl('',[
+  LastNameControl = new FormControl('',[
     Validators.required
   ]);
-  firstNameControl = new FormControl('',[
+  MobileControl = new FormControl('',[
     Validators.required
   ]);
-  eirControl = new FormControl('',[
-    this.customValidator.EIRCodePatternValidator()
+  NationalIDControl = new FormControl('',[
+    Validators.required
   ]);
-  requestTextControl = new FormControl('',[
+  MonthlyIncomeControl = new FormControl('',[
+    Validators.required
+  ]);
+  CurrencyControl = new FormControl('',[
+    Validators.required
+  ]);
+  PreferredBranchControl = new FormControl('',[
     Validators.required
   ]);
 
   applicationFormModel = new ApplicationForm(
+    "20000",
+    "18",
     "",
     "",
     "",
@@ -57,23 +73,20 @@ export class ApplicationComponent implements OnInit {
     "",
     "",
     "",
-    "",
-    "0",
-    "0",
-    "",
-    "",
-    "" //should be {{ CurrentDate | date:'dd/MM/yyyy'}}
+    ""
+      //should be {{ CurrentDate | date:'dd/MM/yyyy'}}
   );
 
   constructor(
     private fb: FormBuilder,
     private dojeIRISservice: DOJEIRISService,
     private emailComp: EmailValidator, //useless as isEmailValid function always returns invalid( ???)
+    //private amountComp: LoanAmountValidator,
     private customValidator: CustomvalidationService,
     private messageService: MessageService,
     private router: Router,
     private thisApp: AppComponent) { }
-  
+
     private log(message: string) {
       this.messageService.add(`DoJE Service: ${message}`);
     }
@@ -85,28 +98,42 @@ export class ApplicationComponent implements OnInit {
   receiveEmailMessage($event) {
     this.applicationFormModel.Email = $event
   }
+
+  /*
+  receiveLoanAmount($event) {
+    this.applicationFormModel.TotalLoanAmount = $event
+  }
+  */
+
   submitted = false;
 
   onSubmit() {
     this.submitted = true;
     var now = new Date()
-    if (this.titleControl.valid &&
-        this.lastNameControl.valid && 
-        this.firstNameControl.valid && 
-        this.requestTextControl.valid &&
+    if (this.TotalLoanAmountControl.valid &&
+        this.LoanTenorControl.valid &&
+        this.FirstNameControl.valid &&
+        this.LastNameControl.valid &&
+        this.MobileControl &&
+        this.NationalIDControl.valid &&
+        this.MonthlyIncomeControl.valid &&
+        this.CurrencyControl.valid &&
+        this.PreferredBranchControl.valid &&
         this.applicationFormModel.Email!="" &&
         (this.emailComp.isEmailValid() == true ||
-          this.emailComp.isEmailValid() == false)) /*Very clever, I know!! But it is MEANT to work when true only*/ {
-        this.applicationFormModel.DateOfRequest= JSON.stringify(new Date());
+          this.emailComp.isEmailValid() == false)) {
+        //this.applicationFormModel.TotalLoanAmount!=""
+        //(this.amountComp.isAmountValid() == true))
+        this.applicationFormModel.DateOfRequest = JSON.stringify(new Date());
         console.log(JSON.stringify(this.applicationFormModel));
     }
     else {
-      this.log(`Please provide valid email and information in all highlighted fields`)
+      this.log(`Please provide information in all highlighted fields`)
       this.thisApp.displayMessge()
       return
     }
     var JSONString = JSON.stringify(this.applicationFormModel)
-    
+
     this.dojeIRISservice.saveRequest(JSONString).subscribe((data: any) => {
       this.reset()
       console.log("Success", data, "success");
@@ -114,7 +141,7 @@ export class ApplicationComponent implements OnInit {
 
     }, error => {
       console.log("There was an error saving request", error);
-      
+
     })
     this.router.navigate(['/home'])
   }
@@ -122,14 +149,12 @@ export class ApplicationComponent implements OnInit {
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.applicationFormModel); }
 
+
   ngOnInit() {
     this.accessChoiceValue = 0;
     this.thisApp.hideMessge();
-    this.filteredOptions = this.eirControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
   }
+
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();

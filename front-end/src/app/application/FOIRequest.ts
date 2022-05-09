@@ -1,43 +1,37 @@
 export class ApplicationForm {
 
     constructor (
-    /// Title / salutation
-    public Title: string,
-    /// first name
+
+    public TotalLoanAmount: string,
+    // total loan amount in EGP
+    public LoanTenor: string,
+    // total loan tenor in months
     public FirstName: string,
-    /// middle name
-    public MiddleName: string,
-    /// last name
+    /// first name
     public LastName: string,
-    /// building name
-    public BuildingName: string,
-    /// street number
-    public Number: string,
-    /// street name
-    public Street: string,
-    /// town or Dublin district
-    public Town: string,
-    /// County
-    public County: string,
-    /// EIRCode
-    public EIRCode: string,
-    /// email
+    /// last name
     public Email: string,
-    /// home phone
-    public HomePhone: string,
-    /// business phone
-    public BusinessPhone: string,
-    /// mobile
+    /// email
     public Mobile: string,
-    /// type of record personal / non-personal
-    public TypeOfRecord: string,
-    /// form of access requested post / other
-    public FormOfAccessChoice: string,
+    /// mobile
+    public NationalID: string,
+    /// national ID or Passport Number
+    public Nationality: string,
+    /// nationality
+    public dob: string,
+    /// date of birth
+    public PreferredBranch: string,
     /// form of access specify
-    public FormOfAccessSpecify: string,
+    public MonthlyIncome: string,
+    /// currency specified in monthly income
+    public MonthlyIncomeCurrency: string,
     /// request free text
-    public RequestText: string,
-    /// date of request
+    public EmploymentType: string,
+    /// employment type (self-employed etc)
+    public ExistingCustomer: string,
+    /// existing customer status
+    public Comments: string,
+    /// additional comments
     public DateOfRequest: string,
     )
     {}

@@ -10,6 +10,7 @@ import {Component, Output, EventEmitter} from '@angular/core';
         In accordance with Section 12 of the FOI Act, I request access to records which
         are:
     </label>
+    <!--
     <mat-radio-group
         aria-labelledby="radio-group-label"
         class="radio-group"
@@ -21,9 +22,10 @@ import {Component, Output, EventEmitter} from '@angular/core';
         {{accessOption}}
     </mat-radio-button>
     </mat-radio-group>
+-->
 `
 //<div>Your access choice is: {{selectedOption}}</div>
-//`
+//'
 })
 export class TypeOfAccessRadioButtonComponent {
   selectedOption: string;
