@@ -1,0 +1,8 @@
+{
+  "/workflow/rest": {
+   "target": "http://localhost:52774",
+   "secure": false,
+   "changeOrigin": true,
+   "pathRewrite": {"^/workflow/rest" : "http://localhost:52774/csp/workflow/rest"}
+ }
+}

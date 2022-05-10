@@ -28,22 +28,20 @@ export class DOJEIRISService {
     };
   }
 
-  // It appears unnecessary to create http options / headers
-  // for ths application, but included for completeness of solution
   httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'responseType': 'json'})
+     headers: new HttpHeaders({
+       'Content-Type': 'application/json',
+       'responseType': 'json'})
   };
 
   saveRequest(foiRequest: any):Observable<any> {
 
     const headers = new HttpHeaders()
     //let url = 'http://localhost:52773/egbank/api/FOIRequest'
-    let url = 'http://ec2-35-178-138-69.eu-west-2.compute.amazonaws.com:52774/egbank/api/FOIRequest'
+    let url = 'http://ec2-35-178-138-69.eu-west-2.compute.amazonaws.com:52774/egbank/api/LoanRequest'
     return this.http.post<any>(url, foiRequest,this.httpOptions)
     .pipe(
-      tap((newrequest: any) => this.log(`Thank you. Your application ID is SN1492-${newrequest.ID}`)),
+      tap((newrequest: any) => this.log(`Thank you. Your application is ${newrequest.Status}`)),
       catchError(this.handleError<any>('saverequest')))
 
 

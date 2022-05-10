@@ -1,0 +1,17 @@
+<div class="hero fullheight-with-navbar main-bg">
+    <p-toast position="top-right"></p-toast>
+
+    <div class="container is-fluid" style="padding-top: 32px; padding-bottom: 32px">
+        <div class="card border-rounded" style="padding: 16px; overflow: auto">
+            <app-tasks-table
+                    [loading]="loading"
+                    [items]="tasks"
+                    (refresh)="loadTasks()"
+                    (accept)="acceptTask($event)"
+                    (relinquish)="relinquishTask($event)"
+                    (details)="showTaskDetails($event)"
+            >
+            </app-tasks-table>
+        </div>
+    </div>
+</div>

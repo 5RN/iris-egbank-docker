@@ -1,0 +1,32 @@
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <div class="container is-fluid">
+        <div class="navbar-brand" style="width: 100%; margin-left: 0">
+            <div class="navbar-item">
+                <span class="has-text-weight-bold">InterSystems IRIS Workflow Portal</span>
+            </div>
+
+            <div class="navbar-end" style="margin-left: auto">
+                <span class="navbar-item" style="display: inline-flex">
+                    <span class="tag is-info" style="font-size: 13px;" [title]="'NAVBAR.CURRENT_USER' | translate">
+                        <i class="pi pi-user"
+                           style="font-size: 13px; font-weight: bold; vertical-align: middle; margin-right: 6px">
+                        </i>
+                        {{user}}
+                    </span>
+                </span>
+
+                <div class="navbar-item" style="display: inline-flex; padding-right: 0">
+                    <button pButton
+                            pRipple
+                            class="p-button-primary p-button-outlined no-label-mobile"
+                            icon="pi pi-sign-out"
+                            iconPos="right"
+                            [label]="('NAVBAR.SIGN_OUT' | translate) || 'Sign out'"
+                            [title]="'NAVBAR.SIGN_OUT' | translate"
+                            (throttleClick)="logout()">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
