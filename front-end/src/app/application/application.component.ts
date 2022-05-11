@@ -58,7 +58,7 @@ export class ApplicationComponent implements OnInit {
   ]);
 
   applicationFormModel = new ApplicationForm(
-    "200",
+    "100",
     "18",
     "",
     "",
