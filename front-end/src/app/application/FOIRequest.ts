@@ -4,8 +4,8 @@ export class ApplicationForm {
 
     public TotalLoanAmount: string,
     // total loan amount in EGP
-    public LoanTenor: string,
-    // total loan tenor in months
+    public LoanTenure: string,
+    // total loan tenure in months
     public FirstName: string,
     /// first name
     public LastName: string,

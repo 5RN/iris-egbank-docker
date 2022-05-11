@@ -21,7 +21,7 @@
         name="TotalLoanAmount"
         [(ngModel)]="applicationFormModel.TotalLoanAmount"
         [formControl]="TotalLoanAmountControl">
-        <mat-hint>Maximum Personal Loan Amount is EGP 3,000,000</mat-hint>
+        <mat-hint>Maximum Personal Loan Amount is EGP 3,000</mat-hint>
       </mat-form-field>
     </td>
     <!--
@@ -31,13 +31,13 @@
     -->
     <td>
       <mat-form-field class="full-width"
-        id = "LoanTenor"
+        id = "LoanTenure"
         appearance="fill">
-        <mat-label>Requested Loan Tenor in Months *</mat-label>
+        <mat-label>Requested Loan Tenure in Months *</mat-label>
         <input type="number" matInput
-        name="Loan Tenor"
-        [(ngModel)]="applicationFormModel.LoanTenor"
-        [formControl]="LoanTenorControl">
+        name="Loan Tenure"
+        [(ngModel)]="applicationFormModel.LoanTenure"
+        [formControl]="LoanTenureControl">
         <mat-hint>Must be between 6 and 120 months</mat-hint>
       </mat-form-field>
     </td>

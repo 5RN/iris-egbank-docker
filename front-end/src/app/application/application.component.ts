@@ -30,9 +30,9 @@ export class ApplicationComponent implements OnInit {
   accessChoiceValue: number;
 
   TotalLoanAmountControl = new FormControl('',[
-    Validators.required, Validators.max(3000000), Validators.min(0)
+    Validators.required, Validators.max(3000), Validators.min(0)
   ])
-  LoanTenorControl = new FormControl('',[
+  LoanTenureControl = new FormControl('',[
     Validators.required, Validators.max(120), Validators.min(6)
   ])
   FirstNameControl = new FormControl('',[
@@ -58,7 +58,7 @@ export class ApplicationComponent implements OnInit {
   ]);
 
   applicationFormModel = new ApplicationForm(
-    "20000",
+    "200",
     "18",
     "",
     "",
@@ -111,7 +111,7 @@ export class ApplicationComponent implements OnInit {
     this.submitted = true;
     var now = new Date()
     if (this.TotalLoanAmountControl.valid &&
-        this.LoanTenorControl.valid &&
+        this.LoanTenureControl.valid &&
         this.FirstNameControl.valid &&
         this.LastNameControl.valid &&
         this.MobileControl &&
