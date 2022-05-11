@@ -15,7 +15,7 @@ export class DOJEIRISService {
     private messageService: MessageService) { }
 
   private log(message: string) {
-    this.messageService.add(`EGBank Service: ${message}`);
+    this.messageService.add(`EG Bank Service: ${message}`);
   }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

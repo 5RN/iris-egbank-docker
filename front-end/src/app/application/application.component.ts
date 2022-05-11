@@ -128,6 +128,7 @@ export class ApplicationComponent implements OnInit {
         console.log(JSON.stringify(this.applicationFormModel));
     }
     else {
+      this.messageService.clear()
       this.log(`Please provide information in all highlighted fields`)
       this.thisApp.displayMessge()
       return
