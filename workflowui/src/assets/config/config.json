@@ -1,12 +1,8 @@
 {
     "LANGUAGES": [
         {
-            "label": "English",
+            "label": "🇬English",
             "value": "en"
-        },
-        {
-            "label": "Русский",
-            "value": "ru"
         }
     ],
     "REST_API_URL": "/workflow/rest",

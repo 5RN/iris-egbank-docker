@@ -15,7 +15,7 @@ export class AppService {
     ) {
         // default configuration in case we missed config file
         AppConfig = {
-            LANGUAGES: [{label: '🇬🇧 English', value: 'en'}, {label: '🇷🇺 Русский', value: 'ru'}],
+            LANGUAGES: [{label: 'English', value: 'en'}],
             REST_API_URL: '/workflow/rest',
             TASKS_LIMIT: 10000
         };

@@ -15,7 +15,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class AppComponent extends BaseComponent implements OnInit {
     currentUser$$: BehaviorSubject<string | null> = this._authService.currentUser$$;
     isLoggedIn: boolean = true;
-    title: string = 'InterSystems IRIS Workflow Portal';
+    title: string = 'EG Bank Loan Review Portal';
 
     constructor(
         private _appService: AppService,

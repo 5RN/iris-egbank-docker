@@ -88,7 +88,7 @@ export class ApplicationComponent implements OnInit {
     private thisApp: AppComponent) { }
 
     private log(message: string) {
-      this.messageService.add(`DoJE Service: ${message}`);
+      this.messageService.add(`EG Bank Service: ${message}`);
     }
   onButtonChange(value: number)
   {

@@ -1,8 +1,9 @@
 <p-blockUI [target]="this" [blocked]="loading">
     <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
 </p-blockUI>
+
 <div class="columns is-multiline p-dialog-content"
-     style="max-height: 80vh; overflow: auto; padding: 0">
+     style="max-height: 60vh; overflow: auto; padding: 0">
     <div class="column is-full">
         <span *ngIf="task?.timeCreated"
               class="details-header"
@@ -19,7 +20,7 @@
               class="details-header"
               style="display: inline-block; margin-right: 32px">
             <i class="pi pi-user" style="font-weight: bold; vertical-align: middle; margin-right: 4px"></i>
-            <span style="font-size: 12px; font-weight: 600">
+            <span style="font-size: 13px; font-weight: 600">
                 {{task?.role}}
             </span>
         </span>
@@ -49,29 +50,22 @@
         </div>
     </div>
 
-	<div *ngIf="task?.subject" class="column is-full">
-	<label class="label">Subject</label>
-        <markdown class="markdown-body" [data]="task?.subject"></markdown>
-    </div>
-
     <!--Message-->
     <div *ngIf="task?.message" class="column is-full">
-	<label class="label">Request Information</label>
         <markdown class="markdown-body" [data]="task?.message"></markdown>
     </div>
 
-    <div *ngFor="let field of formFields | keyvalue" 
+    <div *ngFor="let field of formFields | keyvalue"
          [hidden]="field.key === '$$$Handler'"
          class="column is-full">
         <div class="field"
              *ngIf="!['link', 'img'].includes(formFields?.$$$Handler | get:field.key)">
-			 <input type="checkbox" 
+            <label class="label" [for]="field.key">{{field.key}}</label>
+            <input type="text"
                    [id]="field.key"
-                   
+                   pInputText
                    [(ngModel)]="task?.formFields[field.key]"
-                   >
-            <label class="label" [for]="field.key" style="display: inline; margin-left: 8px">{{field.key}}</label>
-            
+                   style="width: 100%">
         </div>
 
         <div *ngIf="['link'].includes(formFields?.$$$Handler | get:field.key)">

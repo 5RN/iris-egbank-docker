@@ -9,5 +9,4 @@ export interface Task {
     role: string;
     subject: string;
     timeCreated: string;
-    formTemplate: string;
 }

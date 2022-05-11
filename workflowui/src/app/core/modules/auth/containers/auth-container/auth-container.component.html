@@ -1,7 +1,7 @@
 <div class="hero fullheight login-body">
     <div class="login-card">
         <p-card styleClass="login-card-content">
-            <h1 class="is-size-2" style="line-height: 2.5rem">InterSystems IRIS Workflow Portal	</h1>
+            <h1 class="is-size-2" style="line-height: 2.5rem">EG Bank Loan Review Portal</h1>
 
             <p style="margin: 32px 0; font-weight: 600;">
                 {{'LOGIN_FORM.GREETING_MESSAGE' | translate}}
@@ -32,6 +32,10 @@
                            style="width: 100%">
                 </div>
 
+                <div *ngIf="errorMsg" class="field p-error">
+                    {{errorMsg | translate}}
+                </div>
+
                 <div class="buttons" style="margin-top: 32px">
                     <button pButton
                             pRipple
@@ -44,12 +48,6 @@
                 </div>
 
                 <div class="field">
-                    <p-dropdown
-                            [options]="languages"
-                            [formControl]="currentLanguage"
-                            styleClass="slim-dropdown is-pulled-right"
-                    >
-                    </p-dropdown>
                 </div>
             </form>
         </p-card>
